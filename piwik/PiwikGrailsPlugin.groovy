@@ -10,5 +10,6 @@ class PiwikGrailsPlugin {
 	def documentation = "http://grails.org/plugin/piwik"
 
 	def license = "APACHE"
+	def issueManagement = [ system: "GitHub", url: "https://github.com/BeeMee/grails-plugin-piwik-analytics/issues" ]
 	def scm = [ url: "https://github.com/BeeMee/grails-plugin-piwik-analytics" ]
 }

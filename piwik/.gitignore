@@ -12,6 +12,8 @@
 /*.tmproj
 /ivy*
 /eclipse
+/.link_to_grails_plugins
+/target-eclipse
 
 # default HSQL database files for production mode
 /prodDb.*

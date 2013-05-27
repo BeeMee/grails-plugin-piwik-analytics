@@ -1,12 +1,14 @@
 package piwik
 
+import grails.util.Environment
+
 class PiwikTagLib {
 
 	static namespace = "piwik"
 
 	def grailsApplication
 
-	def trackPageviewPiwik = {
+	def trackPageview = {
 		attrs ->
 		if (isEnabled()) {
 			out << """

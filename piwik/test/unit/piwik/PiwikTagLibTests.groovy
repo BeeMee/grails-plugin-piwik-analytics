@@ -3,6 +3,8 @@ package piwik
 
 
 import grails.test.mixin.*
+import grails.util.Environment
+
 import org.junit.*
 
 /**
@@ -52,60 +54,60 @@ _paq.push([ "enableLinkTracking" ]);
 		setEnvironment(Environment.DEVELOPMENT)
 		setConfigVariables()
 
-		assert tagLib.trackPageviewAsynch() == ""
+		assert tagLib.trackPageview() == ""
 	}
 
 	void testTrackPageviewExplicitlyEnabledInDevelopment() {
 		setEnvironment(Environment.DEVELOPMENT)
 		setConfigVariables([enabled : true])
 
-		assert tagLib.trackPageviewAsynch().toString() == expectedAsynch
+		assert tagLib.trackPageview().toString() == expected
 	}
 
 	void testTrackPageviewDefaultDisabledInTest() {
 		setEnvironment(Environment.TEST)
 		setConfigVariables()
 
-		assert tagLib.trackPageviewAsynch() == ""
+		assert tagLib.trackPageview() == ""
 	}
 
 	void testTrackPageviewExplicitlyEnabledInTest() {
 		setEnvironment(Environment.TEST)
 		setConfigVariables([enabled : true])
 
-		assert tagLib.trackPageviewAsynch().toString() == expectedAsynch
+		assert tagLib.trackPageview().toString() == expected
 	}
 
 	void testTrackPageviewDefaultEnabledInProduction() {
 		setEnvironment(Environment.PRODUCTION)
 		setConfigVariables()
 
-		assert tagLib.trackPageviewAsynch().toString() == expectedAsynch
+		assert tagLib.trackPageview().toString() == expected
 	}
 
 	void testTrackPageviewExplicitlyDisabledInProduction() {
 		setEnvironment(Environment.PRODUCTION)
 		setConfigVariables([enabled : false])
 
-		assert tagLib.trackPageviewAsynch() == ""
+		assert tagLib.trackPageview() == ""
 	}
 
 	void testTrackPageviewEnabled() {
 		setConfigVariables([enabled : true])
 
-		assert tagLib.trackPageviewAsynch().toString() == expectedAsynch
+		assert tagLib.trackPageview().toString() == expected
 	}
 
 	void testTrackPageviewDisabled() {
 		setConfigVariables([enabled : false])
 
-		assert tagLib.trackPageviewAsynch() == ""
+		assert tagLib.trackPageview() == ""
 	}
 
-	void testTrackPageviewNoWebPropertyIDButExplicitlyEnabled() {
-		setConfigVariables([enabled : true, webPropertyID: null])
+	void testTrackPageviewNoUrlButExplicitlyEnabled() {
+		setConfigVariables([enabled : true, url: null])
 
-		assert tagLib.trackPageviewAsynch() == ""
+		assert tagLib.trackPageview() == ""
 	}
 
 	void testTrackPageviewCustomTrackingCodeAsStringAttr() {
@@ -132,36 +134,7 @@ _paq.push([ "enableLinkTracking" ]);
 })();
 </script>
 <!-- End Piwik Code -->"""
-		assert tagLib.trackPageviewAsynch(customTrackingCode: "customTrackingCode();").toString() == expected
-	}
-
-	void testTrackPageviewCustomTrackingCodeAsListAttr() {
-		setConfigVariables([enabled : true])
-
-		def expected = """
-<!-- Piwik -->
-<script type="text/javascript">
-var _paq = _paq || [];
-_paq.push(['setDocumentTitle', document.title]);
-_paq.push([ "trackPageView" ]);
-_paq.push([ "enableLinkTracking" ]);
-(function() {
-  var u = (("https:" == document.location.protocol) ? "https" : "http")
-  + "://${piwikurl}";
-  _paq.push([ "setTrackerUrl", u + "piwik.php" ]);
-  _paq.push([ "setSiteId", "${siteid}" ]);
-  var d = document, g = d.createElement("script"), s = d.getElementsByTagName("script")[0];
-  g.type = "text/javascript";
-  g.defer = true;
-  g.async = true;
-  g.src = u + "piwik.js";
-  s.parentNode.insertBefore(g, s);
-})();
-</script>"""
-		
-		assert tagLib.trackPageviewAsynch(customTrackingCode: [
-			[setDocumentTitle: document.title]
-		]).toString() == expected
+		assert tagLib.trackPageview(customTrackingCode: "customTrackingCode();").toString() == expected
 	}
 
 	void testTrackPageviewCustomTrackingCodeAsStringAttrInConfig() {
@@ -189,7 +162,7 @@ _paq.push([ "enableLinkTracking" ]);
 </script>
 <!-- End Piwik Code -->"""
 
-		assert tagLib.trackPageviewAsynch(customTrackingCode: "customTrackingCode();").toString() == expected
+		assert tagLib.trackPageview(customTrackingCode: "customTrackingCode();").toString() == expected
 	}
 
 	void testTrackPageviewCustomTrackingCodeAsListAttrInConfig() {
@@ -206,7 +179,6 @@ _paq.push([ "enableLinkTracking" ]);
 <!-- Piwik -->
 <script type="text/javascript">
 var _paq = _paq || [];
-_paq.push(['_setAccount', '${webPropertyID}']);
 _paq.push(['_setClientInfo', true]);
 _paq.push(['_setDetectFlash', false]);
 _paq.push(['_setCampaignCookieTimeout', 31536000000]);
@@ -229,7 +201,7 @@ _paq.push([ "enableLinkTracking" ]);
 </script>
 <!-- End Piwik Code -->"""
 
-		assert tagLib.trackPageviewAsynch(customTrackingCode: [
+		assert tagLib.trackPageview(customTrackingCode: [
 			[_setClientInfo: true],
 			[_setDetectFlash: false],
 			[_setCampaignCookieTimeout: 31536000000],

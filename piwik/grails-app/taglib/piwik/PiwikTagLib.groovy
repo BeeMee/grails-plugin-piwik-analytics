@@ -74,24 +74,24 @@ _paq.push([ "enableLinkTracking" ]);
 		def enabled = grailsApplication.config.piwik.analytics.enabled
 
 		// disable piwik analytics if url or site id is not defined
-			if (!getPiwikURL() || !getSiteId()) {
-				enabled = false
+		if (!getPiwikURL() || !getSiteId()) {
+			enabled = false
+		}
+		else {
+			// enable piwik analytics by default for production environment
+			if (!(enabled instanceof Boolean) && Environment.current == Environment.PRODUCTION) {
+				enabled = true
 			}
-			else {
-				// enable piwik analytics by default for production environment
-				if (!(enabled instanceof Boolean) && Environment.current == Environment.PRODUCTION) {
-					enabled = true
-				}
-			}
-
-			return enabled
 		}
 
-		private getPiwikURL() {
-			return grailsApplication.config.piwik.analytics.url
-		}
-
-		private getSiteId() {
-			return grailsApplication.config.piwik.analytics.siteid
-		}
+		return enabled
 	}
+
+	private getPiwikURL() {
+		return grailsApplication.config.piwik.analytics.url
+	}
+
+	private getSiteId() {
+		return grailsApplication.config.piwik.analytics.siteid
+	}
+}

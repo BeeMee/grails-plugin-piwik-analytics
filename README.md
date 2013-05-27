@@ -5,19 +5,13 @@ A simple grails plugin to include piwik tracking code
 
 
 <h2>Summary</h2>
-                <div class="wiki-plugin">
-                    Include piwik analyics script
-                </div>
-                
-                <h2>Installation</h2>
-                <div class="wiki-plugin">
-                    <div class="code"><pre>grails install-plugin piwik-analytics</pre></div>
-                </div>
-                
-                
-                <h2>Description</h2>
-                <div class="wiki-plugin">
-                    <a name="Introduction"></a><h2>Introduction</h2><p class="paragraph">This plugin provides a simple taglib to embed Piwik Analytics pageview tracking to your Grails application.</p><p class="paragraph">
+<h2>Installation</h2>
+<div class="code"><pre>grails install-plugin piwik-analytics</pre></div>
+
+<h2>Description</h2>
+<a name="Introduction"></a><h2>Introduction</h2><p class="paragraph">This plugin provides a simple taglib to embed Piwik Analytics pageview tracking to your Grails application.</p>
+<p class="paragraph">
+
 <a name="Usage"></a></p><h2>Usage</h2><p class="paragraph"><a name="Add Piwik URL and Site ID to Configuration"></a></p><h3>Add Piwik URL and Site ID to Configuration</h3><p class="paragraph">Add your Piwik URL and Site ID to grails-app/config/Config.groovy:</p><p class="paragraph"></p><div class="code"><pre>piwik.analytics.url = <span class="java-quote">"http://example.com/piwik"</span><br/>piwik.analytics.siteid = <span class="java-quote">1</span></pre></div><p class="paragraph">
 <a name="Include Piwik Analytics tracking code to your page"></a></p><h3>Include Piwik Analytics tracking code to your page</h3><p class="paragraph">Add the &lt;piwik:trackPageview /&gt; tag to your view(s). If you want all your pages to include the tracking code, just add it to the main.gsp layout. As recommended by Piwik place this as last script in the &lt;head&gt; section.</p><p class="paragraph"></p><div class="code"><pre>&lt;html&gt;
     &lt;head&gt;

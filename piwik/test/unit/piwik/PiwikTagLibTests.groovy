@@ -1,20 +1,13 @@
 package piwik
 
-
-
-import grails.test.mixin.*
+import grails.test.mixin.TestFor
 import grails.util.Environment
 
-import org.junit.*
-
-/**
- * See the API for {@link grails.test.mixin.web.GroovyPageUnitTestMixin} for usage instructions
- */
 @TestFor(PiwikTagLib)
 class PiwikTagLibTests {
 
 	static piwikurl = "http://example.com/piwik"
-	
+
 	static siteid = 1
 
 	static expected = """
